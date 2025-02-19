@@ -1,0 +1,44 @@
+{
+  description = "Base system for raspberry pi 4";
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = {
+    self,
+    nixpkgs,
+    nixos-generators,
+    ...
+  }: {
+    nixosModules = {
+      system = {
+        system.stateVersion = "24.11";
+      };
+      users = {
+        users.users = {
+          admin = {
+            password = "admin123";
+            isNormalUser = true;
+            extraGroups = ["wheel"];
+          };
+        };
+      };
+    };
+
+    packages.aarch64-linux = {
+      sdcard = nixos-generators.nixosGenerate {
+        system = "aarch64-linux";
+        format = "sd-aarch64";
+        modules = [
+          ./configuration.nix
+          self.nixosModules.system
+          self.nixosModules.users
+        ];
+      };
+    };
+  };
+}
