@@ -64,14 +64,13 @@
       cp ${self.outputs.packages.${system}.default}/sd-image/*.img "$img"
       chmod 0640 "$img"
 
-	  mount_dir=$(mktemp -d)
-	 sudo mount -o loop,offset=$((512*16384)) -t vfat "$img" "$mount_dir"
-
-	  cp "$mount_dir/kernel.img" .
-	  sudo umount "$mount_dir"
+      mount_dir=$(mktemp -d)
+      sudo mount -o loop,offset=$((512*16384)) -t vfat "$img" "$mount_dir"
+      cp "$mount_dir/kernel.img" .
+      sudo umount "$mount_dir"
       rmdir "$mount_dir"
 
-	  qemu-img resize -f raw "$img" 4G
+      qemu-img resize -f raw "$img" 4G
 
       qemu-system-aarch64 \
       -machine raspi4b \
