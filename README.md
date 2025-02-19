@@ -1,5 +1,20 @@
 # raspi
 
+## qemu
+
+```shell
+qemu-system-aarch64 \
+  -M raspi4b \
+  -m 2G \
+  -kernel /home/ff/projects/raspi-flake/extracted-files/kernel.img \
+  -dtb /home/ff/projects/raspi-flake/extracted-files/bcm2710-rpi-3-b-plus.dtb \
+  -sd /home/ff/projects/raspi-flake/extracted-files/sd-image.img \
+  -append "console=ttyAMA0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rw" \
+  -serial stdio \
+  -net nic \
+  -net user,hostfwd=tcp::2222-:22
+```
+
 ## raspberry-pi-nix
 
 `nix build .#nixosConfigurations.rpi.config.system.build.sdImage`
