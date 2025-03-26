@@ -30,7 +30,7 @@
             hostName = "raspi-nix";
             useDHCP = false;
             interfaces = {
-              wlan0.useDHCP = true;
+              wlan0.useDHCP = false;
               eth0.useDHCP = true;
             };
           };
@@ -85,7 +85,7 @@
       -device usb-net,netdev=net0 \
       -netdev user,id=net0,hostfwd=tcp::2222-:22 \
       -append "rw earlyprintk loglevel=8 console=ttyAMA1,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk1p2 rootdelay=1" \
-      -serial mon:stdio \
+      -serial stdio \
       -no-reboot
     '';
   };

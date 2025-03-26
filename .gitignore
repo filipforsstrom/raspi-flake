@@ -1,3 +1,5 @@
 **/result
 *.img
+*.qcow2
 
+simple-generators/flake.nix

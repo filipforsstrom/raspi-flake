@@ -1,20 +1,27 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
-  # boot = {
-  #   kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_rpi4;
-  #   kernelParams = ["earlyprintk" "loglevel=8" "console=ttyAMA0,115200" "cma=256M"];
-  # };
+{pkgs, ...}: {
+  imports = [
+    <nixos-hardware/raspberry-pi/4>
+  ];
+
+  boot.kernelParams = [
+    "console=ttyS1,115200n8"
+  ];
+
+  hardware = {
+    raspberry-pi."4".apply-overlays-dtmerge.enable = true;
+    deviceTree = {
+      enable = true;
+      filter = "*rpi-4-*.dtb";
+    };
+  };
+  console.enable = false;
+  environment.systemPackages = with pkgs; [
+    raspberrypi-eeprom
+  ];
   networking.hostName = "nixpi";
   networking.firewall.enable = false;
 
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [
-    openssh
-  ];
 
   services.openssh.enable = true;
 }
