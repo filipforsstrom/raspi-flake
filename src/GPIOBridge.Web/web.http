@@ -1,0 +1,8 @@
+@web_HostAddress = http://localhost:5109
+
+GET {{web_HostAddress}}/gpio/hello
+Accept: application/json
+
+###
+GET {{web_HostAddress}}/gpio/info
+Accept: application/json
