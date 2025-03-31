@@ -41,7 +41,6 @@
   # package
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    dotnetCorePackages.sdk_9_0_1xx
   ];
 
   # user

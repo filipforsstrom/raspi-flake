@@ -18,8 +18,6 @@
     ...
   } @ inputs:
     flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-
       testVm = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs.inputs = inputs;
@@ -45,6 +43,7 @@
             # ./impermanence.nix
             ./hardware-configuration.nix
             # ./disk.nix
+            ./vscode-server.nix
           ];
         };
       };
