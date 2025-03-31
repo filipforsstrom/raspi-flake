@@ -1,10 +1,9 @@
 {
   description = "dotnet environment";
   inputs.flake-utils.url = "github:numtide/flake-utils";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
   outputs = {
-    self,
     flake-utils,
     nixpkgs,
   }:
@@ -17,8 +16,6 @@
             dotnetCorePackages.sdk_9_0
             nuget-to-nix
             gcc
-          ];
-          buildInputs = with pkgs; [
           ];
           shellHook = ''
             export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 #workaround for c# dev kit

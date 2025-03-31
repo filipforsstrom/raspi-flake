@@ -19,7 +19,7 @@ public static class GpioInterop
         if (libraryName == LibraryName)
         {
             // Adjust path as needed
-            return NativeLibrary.Load("/home/ff/projects/raspi-flake/src/gpio/lib/libgpio.so");
+            return NativeLibrary.Load("../gpio/lib/libgpio.so");
         }
 
         return nint.Zero;

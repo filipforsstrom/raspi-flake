@@ -33,16 +33,6 @@
         type = "app";
         program = "${testVm.config.system.build.vm}/bin/run-raspi-nix-vm";
       };
-
-      devShell = pkgs.mkShell {
-        packages = with pkgs; [
-          dotnetCorePackages.sdk_9_0_1xx
-          nuget-to-json
-        ];
-        shellHook = ''
-          export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 #workaround for c# dev kit
-        '';
-      };
     })
     // {
       nixosConfigurations = {
