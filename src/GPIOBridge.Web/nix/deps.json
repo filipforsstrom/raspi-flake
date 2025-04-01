@@ -1,0 +1,12 @@
+[
+  {
+    "pname": "Microsoft.AspNetCore.OpenApi",
+    "version": "9.0.3",
+    "hash": "sha256-URV7tlaHv1JPpqeJXQMYRoIZYU7lFGJPyTKbl2p3gqI="
+  },
+  {
+    "pname": "Microsoft.OpenApi",
+    "version": "1.6.17",
+    "hash": "sha256-Wx9PwlEJPNMq1kp59nJJnLHQ+yNhqCTudcokmlP+tSk="
+  }
+]
