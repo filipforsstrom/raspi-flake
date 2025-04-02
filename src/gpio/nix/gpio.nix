@@ -5,8 +5,14 @@ stdenv.mkDerivation {
 
   src = ../.;
 
-  # Skip the standard make install process
-  dontInstall = false;
+  # Add an explicit buildPhase to build all targets
+  buildPhase = ''
+    # Create directories first
+    mkdir -p ./bin ./lib
+
+    # Build both the executable and the shared library
+    make all
+  '';
 
   # Define a custom installation phase
   installPhase = ''
@@ -16,5 +22,8 @@ stdenv.mkDerivation {
     # Copy the compiled binaries and libraries to the Nix store
     cp ./bin/main $out/bin/
     cp ./lib/libgpio.so $out/lib/
+
+    # Create symlink so it can be called as 'gpio'
+    ln -s $out/bin/main $out/bin/gpio
   '';
 }
