@@ -40,7 +40,7 @@
         program = "${testVm.config.system.build.vm}/bin/run-raspi-nix-vm";
       };
 
-      devShell = pkgs.mkShell {
+      devShells.default = pkgs.mkShell {
         packages = with pkgs; [
           dotnetCorePackages.sdk_9_0
           nuget-to-nix
