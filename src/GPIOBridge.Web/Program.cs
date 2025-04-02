@@ -1,5 +1,5 @@
 using System.Text;
-using web;
+using GPIOBridge.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 

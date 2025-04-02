@@ -1,9 +1,8 @@
 using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Text;
-using Microsoft.Extensions.Configuration;
 
-namespace web;
+namespace GPIOBridge.Web;
 
 public static class GpioInterop
 {
