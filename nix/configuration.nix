@@ -1,6 +1,7 @@
 {pkgs, ...}: let
   # Define the gpio package once to avoid building it twice
-  # gpioPackage = pkgs.callPackage ../src/gpio/nix/gpio.nix {};
+  gpio = pkgs.callPackage ../src/gpio/nix/gpio.nix {};
+  api = pkgs.callPackage ../src/GPIOBridge.Web/nix/GPIOBridge.nix {};
 in {
   imports = [];
 
@@ -45,12 +46,26 @@ in {
     git
     gcc
     dotnetCorePackages.sdk_9_0
-    # gpioPackage
+    gpio
+    api
   ];
 
-  # environment.extraLibraryPaths = [
-  #   "${gpioPackage}/lib"
-  # ];
+  systemd.services.api = {
+    description = "Dotnet API Service";
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
+    environment = {
+      ASPNETCORE_URLS = "http://*:5000";
+      ASPNETCORE_ENVIRONMENT = "Production";
+    };
+    serviceConfig = {
+      ExecStart = "${api}/bin/GPIOBridge.Web";
+      Restart = "always";
+      RestartSec = "10";
+      # Run as a dedicated user for better security
+      # User = "api";
+    };
+  };
 
   # user
   users.users.ff = {
